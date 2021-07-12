@@ -1,11 +1,14 @@
 :root {
+    --backgroundColor: hsl(0, 0%, 85%);
     --button-background: hsl(0, 0%, 100%);
     --button-background-hover: hsl(240, 29%, 83%);
     --config-background: hsl(246, 10%, 39%);
     --config-textColor: hsl(0, 0%, 88%);
+    --game-tiles-amountY: 0;
+    --game-tiles-amountX: 0;
     --game-tile-color: hsl(230, 3%, 47%);
-    --game-tile-width: 100%;
-    --game-tile-height: 100%;
+    --game-tile-width: 20px;
+    --game-tile-height: 20px;
     --game-tile-borderWidth: 1px;
     --game-tile-borderColor: hsl(0, 0%, 0%);
     --game-snake-color: hsl(165, 61%, 51%);
@@ -13,6 +16,7 @@
 
 body {
     margin: 0;
+    background-color: var(--backgroundColor);
 }
 
 select {
@@ -83,16 +87,17 @@ button:hover:enabled {
 #gameContainer {
     height: calc(100vh - 70px);
     width: calc(100vw - 20px);
+    margin-top: 5px;
     margin-left: 50%;
     transform: translateX(-50%);
     display: grid;
-    grid-template-columns: repeat(50, 1fr);
-    grid-template-rows: repeat(50, 1fr);
+    grid-template-columns: repeat(var(--game-tiles-amountX), var(--game-tile-width));
+    grid-template-rows: repeat(var(--game-tiles-amountY), var(--game-tile-height));
+    grid-gap: 1px;
 }
 
 .gameTile {
     width: var(--game-tile-width);
     height: var(--game-tile-height);
     background-color: var(--game-tile-color);
-    border: var(--game-tile-borderWidth) var(--game-tile-borderColor) solid;
 }

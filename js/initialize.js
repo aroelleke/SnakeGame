@@ -10,8 +10,18 @@ function initialize() {
 
     var gameContainer = document.getElementById("gameContainer")
 
-    for (let index = 0; index < 50; index++) {
-        for (let index2 = 0; index2 < 50; index2++) {
+    var dimensions = getDimensions(gameContainer)
+
+    var amountX = Math.round(dimensions.width / 21)
+    var amountY = Math.round(dimensions.height / 21)
+    document.documentElement.style.setProperty("--game-tile-width", "20px")
+    document.documentElement.style.setProperty("--game-tile-height", "20px")
+    document.documentElement.style.setProperty("--game-tiles-amountY", amountY)
+    document.documentElement.style.setProperty("--game-tiles-amountX", amountX)
+
+
+    for (let index = 0; index < amountX; index++) {
+        for (let index2 = 0; index2 < amountY; index2++) {
             gameContainer.appendChild(createTileElement(index2, index))
         }
     }
