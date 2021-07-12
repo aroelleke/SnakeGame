@@ -1,0 +1,77 @@
+:root {
+    --button-background: hsl(0, 0%, 100%);
+    --button-background-hover: hsl(240, 29%, 83%);
+    --config-background: hsl(246, 10%, 39%);
+    --config-textColor: hsl(0, 0%, 88%);
+    --game-tileBackground: hsl(230, 3%, 47%);
+    --game-snakeColor: hsl(165, 61%, 51%);
+}
+
+body {
+    margin: 0;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    outline: none;
+    height: 30px;
+    width: 150px;
+    padding: 0 0 0 10px;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 100%;
+    background-position-y: 3px;
+    border-radius: 3px;
+}
+
+select:hover, select:active, select:focus {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 30px;
+    width: 100px;
+    padding: 2px 5px;
+    border: 1px black solid;
+    border-radius: 3px;
+    transition: .5s background;
+    background-color: var(--button-background);
+}
+
+button:hover:enabled {
+    background-color: var(--button-background-hover);
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+#configContainer {
+    height: 50px;
+    background-color: var(--config-background);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: var(--config-textColor);
+    padding: 0 20px;
+}
+
+#configContainer>* {
+    margin: 0 auto;
+}
+
+#difficulty {
+    width: 100px;
+    margin-left: 10px;
+}
