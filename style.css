@@ -3,8 +3,12 @@
     --button-background-hover: hsl(240, 29%, 83%);
     --config-background: hsl(246, 10%, 39%);
     --config-textColor: hsl(0, 0%, 88%);
-    --game-tileBackground: hsl(230, 3%, 47%);
-    --game-snakeColor: hsl(165, 61%, 51%);
+    --game-tile-color: hsl(230, 3%, 47%);
+    --game-tile-width: 100%;
+    --game-tile-height: 100%;
+    --game-tile-borderWidth: 1px;
+    --game-tile-borderColor: hsl(0, 0%, 0%);
+    --game-snake-color: hsl(165, 61%, 51%);
 }
 
 body {
@@ -74,4 +78,21 @@ button:hover:enabled {
 #difficulty {
     width: 100px;
     margin-left: 10px;
+}
+
+#gameContainer {
+    height: calc(100vh - 70px);
+    width: calc(100vw - 20px);
+    margin-left: 50%;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: repeat(50, 1fr);
+    grid-template-rows: repeat(50, 1fr);
+}
+
+.gameTile {
+    width: var(--game-tile-width);
+    height: var(--game-tile-height);
+    background-color: var(--game-tile-color);
+    border: var(--game-tile-borderWidth) var(--game-tile-borderColor) solid;
 }
