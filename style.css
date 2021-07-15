@@ -12,6 +12,7 @@
     --game-tile-borderWidth: 1px;
     --game-tile-borderColor: hsl(0, 0%, 0%);
     --game-snake-color: hsl(165, 61%, 51%);
+    --game-food-color: hsl(2, 66%, 51%);
 }
 
 body {
@@ -100,4 +101,12 @@ button:hover:enabled {
     width: var(--game-tile-width);
     height: var(--game-tile-height);
     background-color: var(--game-tile-color);
+}
+
+.snake {
+    background-color: var(--game-snake-color) !important;
+}
+
+.food {
+    background-color: var(--game-food-color) !important;
 }
