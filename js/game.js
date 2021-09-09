@@ -11,31 +11,40 @@ class Game {
 
     snake = [{ x: 2, y: 2 }, { x: 2, y: 3 }]
     food = []
-    foodEaten = 0
+    points = 0
 
     currentMovement = "down"
     nextMovement = ""
 
     pause = false
+    lost = false
 
     round = 0
 
 
     async game() {
         this.round++
-        if (this.pause) return
+        if (this.pause || this.lost) return
         this.printGame()
         this.moveSnake()
+        if (this.findDuplicate(this.snake)) {
+            this.looseGame()
+            return
+        }
+        this.checkIfFoodIsFound()
+        this.displayPoints()
         await delay(this.availableDifficulties[this.difficulty] * 1000)
         this.game()
     }
 
     moveSnake() {
         if (this.nextMovement.length == 0) this.nextMovement = this.currentMovement
-        if (this.currentMovement == "down" && this.nextMovement == "up") this.nextMovement = this.currentMovement
-        if (this.currentMovement == "up" && this.nextMovement == "down") this.nextMovement = this.currentMovement
-        if (this.currentMovement == "left" && this.nextMovement == "right") this.nextMovement = this.currentMovement
-        if (this.currentMovement == "right" && this.nextMovement == "left") this.nextMovement = this.currentMovement
+        if (
+            this.currentMovement == "down" && this.nextMovement == "up" ||
+            this.currentMovement == "up" && this.nextMovement == "down" ||
+            this.currentMovement == "left" && this.nextMovement == "right" ||
+            this.currentMovement == "right" && this.nextMovement == "left"
+        ) this.nextMovement = this.currentMovement
 
         for (let index = 0; index < this.snake.length - 1; index++) {
             this.snake[index].x = this.snake[index + 1].x
@@ -57,9 +66,25 @@ class Game {
         }
         this.currentMovement = this.nextMovement
         this.nextMovement = ""
+    }
 
+    findDuplicate(array) {
+        var foundDuplicate = false
+        for (let index = 0; index < array.length; index++) {
+            for (let index2 = 0; index2 < array.length; index2++) {
+                if (index == index2) continue
+                foundDuplicate = array[index].x == array[index2].x && array[index].y == array[index2].y
+                if (foundDuplicate) break
+            }
+            if (foundDuplicate) break
+        }
+        return foundDuplicate
+    }
+
+    checkIfFoodIsFound() {
         var foundFood = this.snake.find((element) => { return element.x == this.food.x && element.y == this.food.y })
         if (foundFood) {
+            this.points++
             this.snake.unshift({ x: this.snake[0].x, y: this.snake[0].y })
             this.spawnFood()
         }
@@ -99,6 +124,10 @@ class Game {
         })
     }
 
+    displayPoints() {
+        document.getElementById("gamePointsCounter").innerHTML = this.points
+    }
+
     startGame() {
         this.pause = false
         this.game()
@@ -109,7 +138,6 @@ class Game {
     }
 
     resetGame() {
-        this.snakeSize = 2
         this.snake = [
             { x: 2, y: 2 },
             { x: 2, y: 3 }
@@ -118,6 +146,14 @@ class Game {
         this.nextMovement = ""
         this.pause = true
         this.printGame()
+    }
+
+    looseGame() {
+        console.log("snake", this.snake)
+        this.snake.forEach(element => {
+            document.getElementById(`x${element.x}-y${element.y}`).classList = "gameTile lost"
+        })
+        document.getElementById(`x${this.food.x}-y${this.food.y}`).classList = "gameTile"
     }
 
     changeDifficulty(value) {
@@ -134,6 +170,7 @@ class Game {
         } else if (code == "ArrowDown") {
             this.nextMovement = "down"
         }
+        console.log("nextMovement:", this.nextMovement)
     }
 
     setAmount(x, y) {

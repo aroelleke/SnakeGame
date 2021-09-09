@@ -12,6 +12,8 @@
     --game-tile-borderWidth: 1px;
     --game-tile-borderColor: hsl(0, 0%, 0%);
     --game-snake-color: hsl(165, 61%, 51%);
+    --game-lost-color1: hsl(0, 74%, 30%);
+    --game-lost-color2: hsl(179, 25%, 39%);
     --game-food-color: hsl(2, 66%, 51%);
 }
 
@@ -107,6 +109,25 @@ button:hover:enabled {
     background-color: var(--game-snake-color) !important;
 }
 
+.lost {
+    background-color: rgb(165, 31, 31);
+    animation-name: snakeLost;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
 .food {
     background-color: var(--game-food-color) !important;
+}
+
+@keyframes snakeLost {
+    0% {
+        background-color: var(--game-lost-color1);
+    }
+    50% {
+        background-color: var(--game-lost-color2);
+    }
+    100% {
+        background-color: var(--game-lost-color1);
+    }
 }

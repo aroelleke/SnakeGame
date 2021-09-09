@@ -1,6 +1,7 @@
 import Game from "./game.js"
 
 
+
 var game = new Game()
 
 var tileSize = 20
